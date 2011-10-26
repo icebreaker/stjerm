@@ -33,6 +33,7 @@
 #include <unistd.h>
 #include <pwd.h>
 #include <signal.h>
+#include <vte/vte.h>
 #include "stjerm.h"
 
 extern int sargc;
@@ -65,11 +66,15 @@ static gboolean _autohide;
 static char _bgimage[200];
 static gboolean _scrolloutput;
 static gboolean _bell;
+static int _cursorblink;
+static int _cursorshape;
 
 static void set_border(char*);
 static void set_mod(char*);
 static void set_key(char*);
 static void set_pos(char *v);
+static void set_cursor_blink(char*);
+static void set_cursor_shape(char*);
 static GtkPositionType read_pos(char *v);
 static gboolean parse_hex_color(char *value, GdkColor *color);
 static gboolean parse_bool_str(char *value, gboolean def);
@@ -102,6 +107,8 @@ GdkModifierType conf_get_key_mod(void);
 gboolean conf_get_auto_hide(void);
 char* conf_get_bg_image(void);
 gboolean conf_get_scroll_on_output(void);
+int conf_get_cursor_blink(void);
+int conf_get_cursor_shape(void);
 
 Option options[OPTION_COUNT] = {
         { "allowbold", "-ab", "BOOLEAN", "Allow bold fonts or not. Default: true." },
@@ -127,7 +134,9 @@ Option options[OPTION_COUNT] = {
         { "tabfill", "-tf", "BOOLEAN", "Whether tabs fill whole tabbar space. Default: true." },
         { "tablabel", "-tl", "STRING", "Label of the tabs. Default: term." },
         { "tabpos", "-tp", "POSITION", "Tabbar position: top, bottom, left, right. Default: bottom." },
-        { "width", "-w", "NUMBER", "Window width. Default: 800." }
+        { "width", "-w", "NUMBER", "Window width. Default: 800." },
+		{ "cursorblink", "-cb", "STRING", "Cursor blink: system, on, off. Default: system."},
+		{ "cursorshape", "-cs", "STRING", "Cursor shape: block, ibeam, underline. Default: block."}
 };
 
 pid_t get_stjerm_pid(void) {
@@ -222,6 +231,24 @@ GtkPositionType read_pos(char *v) {
         return GTK_POS_BOTTOM;
 }
 
+void set_cursor_blink(char *v) {
+    if (!strcmp(v, "system"))
+        _cursorblink = VTE_CURSOR_BLINK_SYSTEM;
+    else if (!strcmp(v, "on"))
+        _cursorblink = VTE_CURSOR_BLINK_ON;
+    else if (!strcmp(v, "off"))
+        _cursorblink = VTE_CURSOR_BLINK_OFF;
+}
+
+void set_cursor_shape(char *v) {
+    if (!strcmp(v, "block"))
+        _cursorshape = VTE_CURSOR_SHAPE_BLOCK;
+    else if (!strcmp(v, "ibeam"))
+        _cursorshape = VTE_CURSOR_SHAPE_IBEAM;
+    else if (!strcmp(v, "underline"))
+        _cursorshape = VTE_CURSOR_SHAPE_UNDERLINE;
+}
+
 gboolean parse_hex_color(char *value, GdkColor *color) {
     if (!gdk_color_parse(value, color)) {
         char *value2 = g_strconcat("#", value, NULL);
@@ -283,6 +310,8 @@ void init_default_values(void) {
     _autohide = TRUE;
     _scrolloutput = TRUE;
     _bell = TRUE;
+	_cursorblink = VTE_CURSOR_BLINK_SYSTEM;
+	_cursorshape = VTE_CURSOR_SHAPE_BLOCK;
 }
 
 void read_value(char *name, char *value) {
@@ -341,6 +370,10 @@ void read_value(char *name, char *value) {
             _tabpos = read_pos(value);
         else if (!strcmp("tablabel", name) || !strcmp("-tablabel", name))
             strcpy(_termname, value);
+		else if (!strcmp("cursorblink", name) || !strcmp("-cb", name))
+            set_cursor_blink(value);
+		else if (!strcmp("cursorshape", name) || !strcmp("-cs", name))
+            set_cursor_shape(value);
         else if (g_str_has_prefix(name, "color") || g_str_has_prefix(name, "-c")) {
             g_strcanon(name, "0123456789", ' ');
             g_strchug(name);
@@ -365,8 +398,8 @@ void read_value(char *name, char *value) {
         else if (!strcmp("scroll", name) || !strcmp("-sc", name))
             _scrolloutput = parse_bool_str(value, _scrolloutput);
         else if (!strcmp("bell", name) || !strcmp("-bell", name))
-            if (!strcasecmp(value, "false"))
-                _bell = FALSE;
+			if (!strcasecmp(value, "false"))
+				_bell = FALSE;
     }
 }
 
@@ -579,7 +612,16 @@ gboolean conf_get_scroll_on_output(void) {
     return _scrolloutput;
 }
 
-gboolean conf_get_bell(void)
-{
+gboolean conf_get_bell(void) {
     return _bell;
 }
+
+int conf_get_cursor_blink(void) {
+    return _cursorblink;
+}
+
+int conf_get_cursor_shape(void) {
+    return _cursorshape;
+}
+
+

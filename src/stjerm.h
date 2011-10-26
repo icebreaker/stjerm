@@ -62,7 +62,7 @@ typedef struct {
     char desc[150];
 } Option;
 
-#define OPTION_COUNT 24
+#define OPTION_COUNT 26
 
 extern void print_help(void);
 extern void print_info(void);
@@ -105,6 +105,8 @@ extern gboolean conf_get_auto_hide(void);
 extern char* conf_get_bg_image(void);
 extern gboolean conf_get_scroll_on_output();
 extern gboolean conf_get_bell();
+extern int conf_get_cursor_blink(void);
+extern int conf_get_cursor_shape(void);
 
 #endif /* __STJERM_H__ */
 

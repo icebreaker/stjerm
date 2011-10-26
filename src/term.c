@@ -67,6 +67,8 @@ GtkWidget* build_term(void) {
     vte_terminal_set_backspace_binding(VTE_TERMINAL(term), 
             VTE_ERASE_ASCII_DELETE);
     vte_terminal_set_audible_bell (VTE_TERMINAL(term), conf_get_bell());
+	vte_terminal_set_cursor_blink_mode(VTE_TERMINAL(term), conf_get_cursor_blink());
+	vte_terminal_set_cursor_shape(VTE_TERMINAL(term), conf_get_cursor_shape());
     
     term_connect_signals(term);
     return term;
