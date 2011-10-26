@@ -5,9 +5,9 @@ This is a fork of [stjerm](http://code.google.com/p/stjerm-terminal-emulator/), 
 Enhancements
 ------------
 * set the cursor shape
-	* -cs [block, ibeam, underline] (default: block)
+	* -cs `block, ibeam, underline` (default: block)
 * set the cursor blink (mode)
-	* -cb [system, on, off] (default: system)
+	* -cb `system, on, off` (default: system)
 
 License
 -------
