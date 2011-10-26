@@ -1,0 +1,256 @@
+2011-01-30 Thomas Pifer <zero456@gmail.com>
+
+  * src/config.c (read_value): Fixed a major oops where the short version of the 
+  'lines' option was '-bl' instead of '-l'. Updated documentation. Added a check
+  for _bell which determines whether the audible bell in the terminal is enabled
+  or not.
+  (_bell): New gboolean.
+  (options): Added information for _bell.
+  (conf_init): Added _bell default value which is TRUE.
+  (conf_get_bell): New function which returns the value of _bell.
+  
+  * src/main.c (print_help): Changed the font example from 'Bitstream Vera Sans 
+  Mono 12' to 'Liberation Mono 11'.
+  (print_version): Updated copyright.
+  
+  * src/stjerm.h (OPTION_COUNT): Incremented it from 23 to 24 to add information
+  about _bell.
+  (conf_get_bell): Declared as extern.
+  
+  *src/term.c (vte_terminal_set_audible_bell): Enables or disables the audible
+  bell depending on the value of _bell through conf_get_bell().
+  
+  * configure.ac (AC_INIT): Version bump to 0.14.
+  (AM_INIT_AUTOMAKE): Added 'dist-xz'.
+  
+  * Updated man page
+  
+  * Updated copyright on all files.
+  
+  * NEWS: Updated with information for 0.14.
+  
+  * TODO: Updated.
+  
+  * Run autogen.sh for 0.14 release.
+  
+  * Stjerm 0.14 released!
+
+2011-01-29 Thomas Pifer <zero456@gmail.com>
+
+  * src/config.c (conf_init): Changed '--v' to '-v' for version info since a 
+  '--' is used for a long version of a command, not a short version.
+  
+  * Updated man page.
+
+2009-06-28 Thomas Pifer <zero456@gmail.com>
+
+  * src/main.c (print_version): Capitalized 'Stjerm'.
+
+2009-06-27 Thomas Pifer <zero456@gmail.com>
+
+  * Updated man page.
+
+2009-06-24 Thomas Pifer <zero456@gmail.com>
+
+  * Removed version.m4 as it was superfluous. 
+  * configure.ac: Version bump to 0.13
+  
+  * NEWS: Updated with information for 0.13.
+  
+  * Run automake and autoheader for 0.13 release.
+  
+  * src/config.c (conf_init): Fixed a major bug that caused 'conf_init' to not check 
+  for the 'width' value in 'options' when grabbing settings from the  user's 
+  .Xdefaults. 
+  
+  * Stjerm 0.13 is -now- officially released!
+  
+2009-05-21 Thomas Pifer <zero456@gmail.com>
+
+  * README: Updated description and added version numbers to dependencies for
+  building.
+  * Updated man page.
+
+2009-05-18 Thomas Pifer <zero456@gmail.com>
+
+  * TODO: Updated.
+
+2009-04-16 Thomas Pifer <zero456@gmail.com>
+  
+  * NEWS: Updated to include release date of 0.12 and a cleaner look.
+  
+  * configure.ac: Updated with 0.13pre version number. 
+
+2009-04-09 Thomas Pifer <zero456@gmail.com>
+
+  * version.m4: Changed version number to 0.13pre.  Newer versions that have yet
+  to be released will now have the suffix pre appended to it.
+
+2009-03-12 Thomas Pifer <zero456@gmail.com>
+
+  * configure.ac: Small changes to give better output and make it easier to 
+  read.
+  
+  * NEWS: Grammitical fixes.
+  
+2009-03-11 Thomas Pifer <zero456@gmail.com>
+
+  * TODO: Updated.
+
+2009-03-10 Thomas Pifer <zero456@gmail.com>
+
+  * src/config.c: Alphabetized options, giving a cleaner output when --help and
+  --info are run.
+
+2009-03-09 Thomas Pifer <zero456@gmail.com>
+
+  * Updated man page.
+
+2009-03-07 Thomas Pifer <zero456@gmail.com>
+
+  * Updated man page.
+
+2009-03-06 Thomas Pifer <zero456@gmail.com>
+  
+  * NEWS: Updated.
+  
+  * version.m4: Version bump to 0.12.
+  
+  * src/mainwindow.c: Removed invalid documentation entry.
+
+2009-02-24 Thomas Pifer <zero456@gmail.com>
+  
+  * TODO: Updated.
+
+2009-02-23 Thomas Pifer <zero456@gmail.com>
+
+  * src/mainwindow.c: Removed work around made on 2009-02-22 as it did not solve the
+  problem.  Removed documentation pertaining to the work around.
+  
+  * version.m4: Bumped version with current date.
+
+2009-02-22 Thomas Pifer <zero456@gmail.com>
+  
+  * src/mainwindow.c: Updated documentation.
+  (build_mainwindow): Initially declare 'fullscreen' as true as a temporary work 
+  around for fullscreen bug.
+  (mainwindow_toggle): Added mainwindow_toggle_full before showing/hiding the 
+  window as a temporary work around for fullscreen bug.
+  
+  * version.m4: Bumped version with current date.
+
+2009-02-21 Thomas Pifer <zero456@gmail.com>
+  
+  * mainwindow.c: Updated documentation
+
+2009-02-20 Thomas Pifer <zero456@gmail.com>
+  
+  * src/config.c: Updated documentation.
+  * src/mainwindow.c: Updated documentation.
+  
+  * src/shortcut.c: Updated documentation.
+  (init_key): Update error message output to conform to GNU standards.
+
+2009-02-19 Thomas Pifer <zero456@gmail.com>
+  
+  * README: Updated to conform to GNU standards.
+  
+  * Removed 'Last Change' string from man page.
+  
+  * NEWS: Updated to conform to GNU standards.  Updated with information for the
+  new version. 
+
+2009-02-17 Thomas Pifer <zero456@gmail.com>
+  
+  * src/main.c: Updated documentation.
+  (print_help): Combined two printf statements.
+
+2009-02-16 Thomas Pifer <zero456@gmail.com>
+
+  * src/main.c (print_help): Added --version information.  Refined output.
+  * Updated man page.
+  
+  * src/config.c (options): Grammatical fix.
+
+
+2009-02-11 Thomas Pifer <zero456@gmail.com>
+
+  * src/mainwindow.c (handle_x_error): Grammatical fix.  Update output to 
+  conform to GNU standards.
+  
+  * src/main.c (print_version): Updated copyright.
+  
+  * src/config.c (pid_t get_stjerm_pid, conf_init): Grammatical fixes.
+  
+  * README: Updated.
+
+
+2009-02-06 Thomas Pifer <zero456@gmail.com>
+  
+  * TODO: Updated.
+  
+  * configure.ac: Updated to conform to GNU standards.
+  (AM_INIT_AUTOMAKE): Added dist-bzip2 and no-dist-gzip options.
+
+2009-02-04 Thomas Pifer <zero456@gmail.com>
+  
+  * ChangeLog: Updated to conform to GNU standards.  Removed old entries.
+  
+  * src/main.c (print_help): Added comments.  Updated output to conform to GNU
+  standards.
+  (print_version): Updated to conform to GNU standards.
+  
+  * src/mainwindow.c (handle_x_error): Grammatical fix.
+  (mainwindow_next_tab, mainwindow_prev_tab): Formatting fix.
+  
+  * src/config.c (conf_init): Formatting fix.
+
+2009-01-31 Thomas Pifer <zero456@gmail.com>
+
+  * version.m4: New file to modularize version numbering.
+  * configure.ac: Added an m4-include for version.m4.
+  
+  * src/Makefile.am (stjerm_SOURCES): Add stjerm.h, fixing errors when running
+  make dist.  
+  (STJERM_VERSION): Changed the value to the @VERSION@ variable used in the
+  Makefile, allowing the version number defined in version.m4 to be used in the 
+  program as well.
+
+2009-01-26 Thomas Pifer <zero456@gmail.com>
+  
+  * Updated man page.
+  
+2009-01-22 Thomas Pifer <zero456@gmail.com>
+  
+  * Updated copyright.
+
+2009-01-20 Thomas Pifer <zero456@gmail.com>
+  
+  * src/mainwindow.c (mainwindow_next_tab, mainwindow_prev_tab): New if 
+  statements that move to the first or last tab when the end or beginning of the
+  tab bar is reached, respectively.
+  
+  * src/main.c (print_version): New function.
+  (print_help, print_info): Removed version info from output.
+  * src/config.c (conf_init): Check for --v and --version arguments and print
+  version information when passed.
+
+2009-01-12 Thomas Pifer <zero456@gmail.com>
+
+  * src/mainwindow.c (build_mainwindow): Changed the shortcut keys for prev_tab
+  and next_tab to GDK_Page_Up and GDK_Page_Down, respectively.
+
+2008-04-30 Thomas Pifer <zero456@gmail.com>
+
+  * src/mainwindow.c (build_mainwindow): Set gtk_window_set_resizable to TRUE,
+  allowing full screen to work properly.
+
+2008-03-25 Thomas Pifer <zero456@gmail.com>
+
+  * src/mainwindow.c (build_mainwindow): New GClosure args copy and paste.
+  Added gtk_accel_group_connect for copy and paste.
+  (mainwindow_copy, mainwindow_paste): New functions that handle the copy and 
+  pasting.
+    
+  * Updated man page.
+

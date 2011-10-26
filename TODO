@@ -1,0 +1,8 @@
+* Create UML model of stjerm startup/configuration
+* Redocument code
+* Understand why passing RGB codes with the # are ignored and to fix them if at
+  all possible
+* Create Debian packages for Ubuntu.
+* Modernize code: This includes a complete (or near complete) rewrite, 
+  privatizing functions and variables as well as making it easier to understand
+  and use

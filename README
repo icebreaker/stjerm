@@ -1,0 +1,21 @@
+Stjerm is a GTK+-based drop-down terminal emulator similar to the consoles used
+PC games such as Quake and Half-Life 2.  Stjerm sets itself apart from
+similar programs by providing a minimalistic interface combined with a small 
+file size, lightweight memory usage and easy integration with composite window
+managers, such as Compiz.
+
+Information about the current version of Stjerm (including new features and 
+changes) can be found in the file NEWS.
+
+For building and installation instructions, please see the file INSTALL.
+
+Dependencies for building:  
+  * pkg-config
+  * GTK+ 2 (>= 2.10)
+  * VTE (>= 0.16)
+
+The two subdirectories, 'src' and 'doc', contain the source code files and 
+manual for Stjerm, respectively.
+
+Stjerm is distributed under the terms of the GNU General Public License, 
+version 2.  For complete information, see the file COPYING.

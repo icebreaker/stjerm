@@ -1,0 +1,33 @@
+NEWS file for Stjerm <http://code.google.com/p/stjerm-terminal-emulator/>
+
+0.14 (2011-01-30)
+  * New feature: You can now set whether you want an audible bell enabled for
+    the terminal though the .Xdefaults and runtime arguments bell and -bell, 
+    respectively.  The default value is TRUE.  See the man page for more info.
+  * Fixed a bug where the command line argument for setting the amount of
+    scrollback lines was set to '-bl' instead of '-l'. 
+  * Changed '--v' to '-v' for version info since a '--' is used for a long 
+    version of a command, not a short version.  '--version' is still there and
+    remains unchaged.
+  * Stjerm's source code is now released as both a bzip2 and xz compressed 
+    tarball.  Both contain the same source code, however the xz tarball is
+    slightly smaller in size.
+  * The man page and --help runtime argument have had slight updates to them.
+
+0.13 (2009-06-24):
+  * Man page has been rewritten making it cleaner and more concise
+  * --help and --info options have been alphabetized making it easier to read
+  * Removed version.m4 as it was superfluous (The version number is updated in 
+    cofigure.ac)
+  * An RPM is now available for Fedora 11 users!
+
+0.12 (2009-03-06):
+  * Added copy and paste keyboard shortcuts 'c' and 'v', respectively
+  * Keyboard shortcuts to switch to the previous and next tab have been 
+    re-mapped to page up and page down, respectively
+  * Added version information output through --version and --v
+  * Tabs now loop when the end or beginning of the tab bar is reached
+  * Many files and functions have been updated to conform to GNU standards (Such 
+    as README and print_version)
+  * Added NEWS and TODO
+  * Version information is now updated through version.m4
